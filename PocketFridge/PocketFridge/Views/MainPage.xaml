@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocketFridge.Views.MainPage"
+             >
+
+    <NavigationPage.TitleView>
+        <Label HorizontalOptions="Center">
+        <Label.FormattedText>
+            <FormattedString>
+                <Span Text="Pocket Fridge " FontSize="16" TextColor="LightGray"/>
+                <Span Text="saving the world one item at a time" FontSize="12" FontAttributes="Italic" TextColor="LightGray"/>
+            </FormattedString>
+        </Label.FormattedText>
+        </Label>
+    </NavigationPage.TitleView>
+    
+    <StackLayout>
+        
+
+        <CollectionView ItemsSource="{Binding Inventory}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+                    <Grid Padding="10"
+                          RowDefinitions="Auto, *"
+                          ColumnDefinitions="Auto, *">
+                        
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="Yellow" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Product name: "/>
+                                    <Span Text="{Binding foodName}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Grid.Column="1"
+                                HorizontalOptions="End">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Quantatiy: " FontAttributes="Bold"/>
+                                    <Span Text="{Binding quantity}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Grid.Row="1" TranslationY="5">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Next expiry: " FontAttributes="Bold"/>
+                                    <Span Text="{Binding oldest.expiriy}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <CheckBox Grid.Row="1" 
+                                  Grid.Column="1" 
+                                  HorizontalOptions="End"
+                                  IsChecked="{Binding oldest.opened}"
+                                  CheckedChanged="OnCheckBoxChecked"
+                                  TranslationX="9"
+                                  />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView >
+    </StackLayout>
+
+</ContentPage>

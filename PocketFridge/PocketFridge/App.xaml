@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocketFridge.App">
+    <Application.Resources>
+        
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="#3a221f"/>
+            <Setter Property="BarTextColor" Value="LightGray"/>
+            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+        </Style>
+
+   
+        
+
+    </Application.Resources>
+</Application>
