@@ -4,7 +4,7 @@
              x:Class="PocketFridge.Views.ItemDetailPage"
              Title="Pocket Fridge"
              NavigationPage.HasBackButton="False">
-    
+
     <NavigationPage.TitleView>
         <Label HorizontalOptions="Center">
             <Label.FormattedText>
@@ -17,16 +17,35 @@
     </NavigationPage.TitleView>
    
     <ContentPage.Content>
-        <StackLayout>
-            
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button Text="done"
-                    VerticalOptions="End"
-                    HorizontalOptions="CenterAndExpand"
-                    Clicked="OnBtnClicked"
-                    />
+        <StackLayout Padding="0,5,0,0">
+            <!-- This defines the header just below the banner, cotains the  -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition /> <!--This is an empty column, to make sure that the foodName is centered-->
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="" ></Label>
+                <Label Grid.Column="1" Text="{Binding foodName}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                <Image Grid.Column="2" Scale="1" Source="deletebin" HorizontalOptions="CenterAndExpand" VerticalOptions ="CenterAndExpand" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="OnDeleteTapped"
+                            NumberOfTapsRequired="1" /> 
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+            <CollectionView ItemsSource="{Binding foodDetail}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding expiriyString}" Padding="5,10,0,0"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

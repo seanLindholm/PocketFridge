@@ -6,12 +6,10 @@ namespace PocketFridge.Models
 {
     public class FoodItem
     {
-        internal DateTime expiriyDate;
-        public string expiriy {
+        public string expiriyString {
             get { return expiriyDate.ToString("dd/MM/yyyy"); }
-            set { expiriyDate = DateTime.Parse(value); } 
         }
-
+        public DateTime expiriyDate { get; set;} 
         public string fridgeName { get; set; }
         public bool opened { get; set; }
 

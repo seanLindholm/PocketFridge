@@ -16,68 +16,72 @@
     </NavigationPage.TitleView>
     
     <StackLayout>
-        
 
-        <CollectionView ItemsSource="{Binding Inventory}"
-                        SelectionMode="Single"
-                        SelectionChanged="OnSelectionChanged">
-            <CollectionView.ItemTemplate>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Inventory}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemTemplate>
 
-                <DataTemplate>
-                    <Grid Padding="10"
-                          RowDefinitions="Auto, *"
-                          ColumnDefinitions="Auto, *">
+                    <DataTemplate>
+                        <Grid Padding="10"
+                              RowDefinitions="Auto, *"
+                              ColumnDefinitions="Auto, *">
                         
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal" />
-                                <VisualState Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="Yellow" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal" />
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Yellow" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
 
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Product name: "/>
-                                    <Span Text="{Binding foodName}"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Product name: "/>
+                                        <Span Text="{Binding foodName}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                        <Label Grid.Column="1"
-                                HorizontalOptions="End">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Quantatiy: " FontAttributes="Bold"/>
-                                    <Span Text="{Binding quantity}"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                            <Label Grid.Column="1"
+                                    HorizontalOptions="End">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Quantatiy: " FontAttributes="Bold"/>
+                                        <Span Text="{Binding quantity}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                        <Label Grid.Row="1" TranslationY="5">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Next expiry: " FontAttributes="Bold"/>
-                                    <Span Text="{Binding oldest.expiriy}"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                            <Label Grid.Row="1" TranslationY="5">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Next expiry: " FontAttributes="Bold"/>
+                                        <Span Text="{Binding oldest.expiriyString}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                        <CheckBox Grid.Row="1" 
-                                  Grid.Column="1" 
-                                  HorizontalOptions="End"
-                                  IsChecked="{Binding oldest.opened}"
-                                  CheckedChanged="OnCheckBoxChecked"
-                                  TranslationX="9"
-                                  />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView >
+                            <CheckBox Grid.Row="1" 
+                                      Grid.Column="1" 
+                                      HorizontalOptions="End"
+                                      IsChecked="{Binding oldest.opened}"
+                                      CheckedChanged="OnCheckBoxChecked"
+                                      TranslationX="9"
+                                      />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView >
+        </RefreshView>
+        <Button Text="Click me :)"
+                Clicked="Button_Clicked"/>
     </StackLayout>
 
 </ContentPage>

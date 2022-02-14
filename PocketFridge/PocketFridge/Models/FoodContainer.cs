@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,8 +16,9 @@ namespace PocketFridge.Models
         public int ID { get; set; }
 
         public string foodName { get; set; }
+        [TextBlob(nameof(foodsblobbed))]
         public List<FoodItem> foods { get; set; }
-
+        public string foodsblobbed { get; set; }
         public int quantity { get; set; }
 
         public FoodItem oldest { 

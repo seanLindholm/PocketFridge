@@ -13,35 +13,59 @@ namespace PocketFridge.Views
     public partial class ItemDetailPage : ContentPage
     {
 
-        public ItemDetailPage(string ItemId = null)
+        public string foodName { get; private set; }
+        public IList<FoodItem> foodDetail { get; private set; }
+        private FoodContainer foodCon { get; set; }
+
+        public ItemDetailPage(int? ItemId = null)
         {
             InitializeComponent();
             if (ItemId != null)
             {
-                LoadItem(ItemId);
+                LoadItem((int)ItemId);
             }
         }
 
-        async void LoadItem(string itemId)
+        void LoadItem(int itemId)
         {
             try
             {
-                int id = Convert.ToInt32(itemId);
+                
                 // Retrieve the note and set it as the BindingContext of the page.
-                FoodContainer item = await App.Database.GetFridgeItem(id);
-                BindingContext = item;
+                foodCon = App.Database.GetFridgeItem(itemId);
+                foodName = foodCon.foodName;
+                foodDetail = foodCon.foods;
+                BindingContext = this;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Console.WriteLine("Failed to load note.");
+                Console.WriteLine(e);
+
             }
         }
 
-        void OnBtnClicked(object sender, EventArgs args)
+       
+        async void OnDeleteTapped(object sender, EventArgs args)
         {
-            Console.WriteLine("Thank you");
-            Navigation.PopAsync();
+            try
+            {
+                bool answer = await DisplayAlert("Delete", $"Are you sure you want to deleted food item {foodName} and all its content?", "Yes", "No");
+                Console.WriteLine("Answer: " + answer);
+                if (answer)
+                {
+                    await App.Database.DeleteFoodContainer(foodCon);
+                    await Navigation.PopToRootAsync();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
+
     }
 
 }
