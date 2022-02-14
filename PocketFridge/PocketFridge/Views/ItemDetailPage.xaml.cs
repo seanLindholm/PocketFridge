@@ -17,23 +17,23 @@ namespace PocketFridge.Views
         public IList<FoodItem> foodDetail { get; private set; }
         private FoodContainer foodCon { get; set; }
 
-        public ItemDetailPage(int? ItemId = null)
+        public ItemDetailPage(string foodName = null)
         {
             InitializeComponent();
-            if (ItemId != null)
+            if (foodName != null)
             {
-                LoadItem((int)ItemId);
+                LoadItem(foodName);
             }
         }
 
-        void LoadItem(int itemId)
+        void LoadItem(string foodName)
         {
             try
             {
                 
                 // Retrieve the note and set it as the BindingContext of the page.
-                foodCon = App.Database.GetFridgeItem(itemId);
-                foodName = foodCon.foodName;
+                foodCon = App.Database.GetFridgeItem(foodName);
+                this.foodName = foodCon.foodName;
                 foodDetail = foodCon.foods;
                 BindingContext = this;
             }
@@ -50,9 +50,8 @@ namespace PocketFridge.Views
         {
             try
             {
-                bool answer = await DisplayAlert("Delete", $"Are you sure you want to deleted food item {foodName} and all its content?", "Yes", "No");
-                Console.WriteLine("Answer: " + answer);
-                if (answer)
+                bool yes = await DisplayAlert("Delete", $"Are you sure you want to deleted the food item '{foodName}' and all its content?", "Yes", "No");
+                if (yes)
                 {
                     await App.Database.DeleteFoodContainer(foodCon);
                     await Navigation.PopToRootAsync();

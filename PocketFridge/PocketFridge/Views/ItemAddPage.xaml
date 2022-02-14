@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PocketFridge.Views.ItemAddPage">
+             x:Class="PocketFridge.Views.ItemAddPage"
+              NavigationPage.HasBackButton="False">
     <NavigationPage.TitleView>
-        <Label>
+        <Label HorizontalOptions="Center">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="Pocket Fridge " FontSize="16" TextColor="LightGray"/>

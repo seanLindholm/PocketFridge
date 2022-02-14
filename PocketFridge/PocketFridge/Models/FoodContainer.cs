@@ -12,9 +12,8 @@ namespace PocketFridge.Models
     /// </summary>
     public class FoodContainer
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-
+        
+        [PrimaryKey]
         public string foodName { get; set; }
         [TextBlob(nameof(foodsblobbed))]
         public List<FoodItem> foods { get; set; }

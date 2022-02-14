@@ -30,26 +30,37 @@ namespace PocketFridge.Data
             return temp;
         }
 
-        public FoodContainer GetFridgeItem(int id)
+        public FoodContainer GetFridgeItem(string foodName_id)
         {
-            // Get a specific note.
-            return ReadOperations.GetWithChildren<FoodContainer>(database.GetConnection(), id);
-            //return database.Table<FoodContainer>()
-            //                .Where(i => i.ID == id)
-            //                .FirstOrDefaultAsync();
+            FoodContainer result;
+            //Try to find the food, by name
+            try
+            {
+                result = ReadOperations.GetWithChildren<FoodContainer>(database.GetConnection(), foodName_id);
+            }
+            //If not just return null
+            catch
+            {
+                result = null;
+            }
+            return result;
         }
 
         public void SaveItem(FoodContainer item)
         {
-            if (item.ID != 0)
+            //update the item if the foodName is not unique / already stored
+            if (GetFridgeItem(item.foodName) != null)
             {
                 // Update an existing note.
                 WriteOperations.UpdateWithChildren(database.GetConnection(), item);
+                Console.WriteLine("Updating " + item.foodName);
             }
             else
             {
                 // Save a new note.
                 WriteOperations.InsertWithChildren(database.GetConnection(), item);
+                Console.WriteLine("Inserting " + item.foodName);
+
             }
         }
 

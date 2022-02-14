@@ -21,7 +21,7 @@
             <!-- This defines the header just below the banner, cotains the  -->
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition /> <!--This is an empty column, to make sure that the foodName is centered-->

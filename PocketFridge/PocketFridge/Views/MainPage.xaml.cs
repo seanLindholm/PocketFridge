@@ -13,7 +13,7 @@ namespace PocketFridge.Views
 {
     public partial class MainPage : ContentPage
     {
-
+        private int counter = 0;
         public ICommand RefreshCommand { get; }
         bool isRefreshing;
 
@@ -57,7 +57,7 @@ namespace PocketFridge.Views
             FoodContainer selectedItem = e.CurrentSelection.FirstOrDefault() as FoodContainer;
             
             //When item selected navigate to the detail page
-            await Navigation.PushAsync(new ItemDetailPage(selectedItem.ID));
+            await Navigation.PushAsync(new ItemDetailPage(selectedItem.foodName));
 
             //Clear selection
             collectionView.SelectedItem = null;
@@ -65,7 +65,7 @@ namespace PocketFridge.Views
 
         void OnCheckBoxChecked(object sender, CheckedChangedEventArgs e)
         {
-            Console.WriteLine("Checkbox checked: " + e.Value);
+            //Console.WriteLine("Checkbox checked: " + e.Value);
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -80,7 +80,26 @@ namespace PocketFridge.Views
             };
             App.Database.SaveItem(foodItem);
             RefreshPage();
+        }
 
+        private async void OnAddTapped(object sender, EventArgs e)
+        {
+
+            //When item selected navigate to the detail page
+            await Navigation.PushAsync(new ItemAddPage());
+
+
+            //var foodItem = new FoodContainer
+            //{
+            //    foodName = "Milk_" + counter.ToString(),
+            //    foods = new List<FoodItem> { new FoodItem { expiriyDate = DateTime.Now, fridgeName = "SeansMad", opened = false } ,
+            //                  },
+            //    quantity = 1
+
+            //};
+            //App.Database.SaveItem(foodItem);
+            //RefreshPage();
+            //counter++;
         }
 
         private void RefreshPage()

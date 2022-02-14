@@ -14,14 +14,19 @@
         </Label.FormattedText>
         </Label>
     </NavigationPage.TitleView>
-    
-    <StackLayout>
+
+    <Grid Padding="0,0,0,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
 
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding Inventory}"
                             SelectionMode="Single"
-                            SelectionChanged="OnSelectionChanged">
+                            SelectionChanged="OnSelectionChanged"
+                            Grid.Row="0">
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate>
@@ -80,8 +85,30 @@
                 </CollectionView.ItemTemplate>
             </CollectionView >
         </RefreshView>
-        <Button Text="Click me :)"
-                Clicked="Button_Clicked"/>
-    </StackLayout>
+       
+
+        <!-- Display a bottom tab bar containing two tabs -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column = "0" Text="Hello" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Label Grid.Column = "1" Text="you" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Image Grid.Column = "2" Source="deletebin" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                            Tapped="OnAddTapped"
+                            NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+        
+
+    </Grid>
+
+   
+    
 
 </ContentPage>

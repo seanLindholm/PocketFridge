@@ -10,8 +10,7 @@
             <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
         </Style>
 
-   
-        
-
     </Application.Resources>
+    
+    
 </Application>
