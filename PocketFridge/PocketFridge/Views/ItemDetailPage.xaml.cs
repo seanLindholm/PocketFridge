@@ -34,7 +34,7 @@ namespace PocketFridge.Views
                 // Retrieve the note and set it as the BindingContext of the page.
                 foodCon = App.Database.GetFridgeItem(foodName);
                 this.foodName = foodCon.foodName;
-                foodDetail = foodCon.foods;
+                foodDetail = foodCon.foods.OrderBy(x=>x.expiriyDate).ToList();
                 BindingContext = this;
             }
             catch (Exception e)

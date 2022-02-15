@@ -96,7 +96,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column = "0" Text="Hello" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Label Grid.Column = "1" Text="you" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-            <Image Grid.Column = "2" Source="deletebin" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Image Grid.Column = "2" Source="add" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
                             Tapped="OnAddTapped"

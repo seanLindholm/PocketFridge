@@ -12,6 +12,7 @@ namespace PocketFridge.Models
         public DateTime expiriyDate { get; set;} 
         public string fridgeName { get; set; }
         public bool opened { get; set; }
+        public int? opened_dateTillExpired { get; set; }
 
     }
 }

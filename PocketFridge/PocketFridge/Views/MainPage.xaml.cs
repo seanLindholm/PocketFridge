@@ -13,7 +13,6 @@ namespace PocketFridge.Views
 {
     public partial class MainPage : ContentPage
     {
-        private int counter = 0;
         public ICommand RefreshCommand { get; }
         bool isRefreshing;
 
