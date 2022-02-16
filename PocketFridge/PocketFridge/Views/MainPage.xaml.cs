@@ -86,19 +86,6 @@ namespace PocketFridge.Views
 
             //When item selected navigate to the detail page
             await Navigation.PushAsync(new ItemAddPage());
-
-
-            //var foodItem = new FoodContainer
-            //{
-            //    foodName = "Milk_" + counter.ToString(),
-            //    foods = new List<FoodItem> { new FoodItem { expiriyDate = DateTime.Now, fridgeName = "SeansMad", opened = false } ,
-            //                  },
-            //    quantity = 1
-
-            //};
-            //App.Database.SaveItem(foodItem);
-            //RefreshPage();
-            //counter++;
         }
 
         private void RefreshPage()

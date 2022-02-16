@@ -4,6 +4,8 @@
              x:Class="PocketFridge.Views.MainPage"
              >
 
+    
+    
     <NavigationPage.TitleView>
         <Label HorizontalOptions="Center">
         <Label.FormattedText>
