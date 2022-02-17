@@ -32,10 +32,19 @@ namespace PocketFridge.Views
         public bool opened_ { get; set; }
 
 
-        public ItemAddPage()
+        public ItemAddPage(string foodName = null)
         {
             InitializeComponent();
             initFoodNames();
+            //If an input of foodname is set, sligthly modife the add page view
+            if(foodName != null)
+            {
+                ExisitingFood.IsVisible = false;
+                foodPicker.IsVisible = false;
+                selected_foodContainer = App.Database.GetFridgeItem(foodName);
+                UserDefinedLable.Text = "Adding a food item for " + foodName; ;
+                entry_food_container.IsVisible = false;
+            }
             BindingContext = this;
             
         }
@@ -105,7 +114,7 @@ namespace PocketFridge.Views
                 if (dict_food.ContainsKey(user_defined_foodName.ToLower()))
                 {
                     //Alter the user
-                    var yes = await DisplayAlert("Duplicate food name", "The food name {} already exist, do you want to use this container?", "yes", "no");
+                    var yes = await DisplayAlert("Duplicate food name", $"The food name '{user_defined_foodName}' already exist, do you want to use this container?", "yes", "no");
                     if (yes)
                     {
                         container = dict_food[user_defined_foodName.ToLower()];

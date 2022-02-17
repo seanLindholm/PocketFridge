@@ -29,6 +29,16 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
+                <Image Grid.Column="0"
+                       Source="deletebin"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDeleteTapped"
+                                              NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
                 <Label Grid.Column="0"
                        Text="{Binding foodName}"
                        FontSize="20"
@@ -37,11 +47,11 @@
                        VerticalOptions="CenterAndExpand"
                        FontAttributes="Bold" />
                 <Image Grid.Column="0"
-                       Source="deletebin"
+                       Source="add"
                        HorizontalOptions="EndAndExpand"
                        VerticalOptions="CenterAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnDeleteTapped"
+                        <TapGestureRecognizer Tapped="OnAddTapped"
                                               NumberOfTapsRequired="1" />
                     </Image.GestureRecognizers>
                 </Image>
@@ -65,7 +75,7 @@
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">
                                     <SwipeItem Text="Delete"
-                                               IconImageSource="deletebin"
+                                               IconImageSource="deletebin_swipe"
                                                BackgroundColor="Red"
                                                Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteItemCommand}"
                                                CommandParameter="{Binding .}" />
@@ -74,9 +84,14 @@
                             <SwipeView.RightItems>
                                 <SwipeItem Text="Edit"
                                            IconImageSource="edit"
-                                           BackgroundColor="Orange" />
+                                           BackgroundColor="Orange"
+                                           Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.EditItemCommand}"
+                                           CommandParameter="{Binding .}" />
                                 <SwipeItem Text="Consumed"
-                                           BackgroundColor="Green" />
+                                           IconImageSource="consumed"
+                                           BackgroundColor="Green"
+                                           Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.ConsumeItemCommand}"
+                                           CommandParameter="{Binding .}" />
                             </SwipeView.RightItems>
                             <Grid BackgroundColor="GhostWhite"
                                   Margin="5,0,5,0">
@@ -92,45 +107,6 @@
                                     <ColumnDefinition />
 
                                 </Grid.ColumnDefinitions>
-                                <!--Boarder around each item-->
-                                <!--Horizontal lines-->
-                                <!--<BoxView 
-                                         Grid.Row="0"
-                                         Grid.Column="0"
-                                         Grid.ColumnSpan="2"
-                                         BackgroundColor="{StaticResource BoardColor}"
-                                         HeightRequest="2"
-                                         VerticalOptions="Start"
-                                         HorizontalOptions="FillAndExpand" />
-                                
-                                <BoxView 
-                                         Grid.Row="2"
-                                         Grid.Column="0"
-                                         Grid.ColumnSpan="2"
-                                         BackgroundColor="{StaticResource BoardColor}"
-                                         HeightRequest="2"
-                                         VerticalOptions="End"
-                                         HorizontalOptions="FillAndExpand" />
-                                
-                                --><!--Vertical lines--><!--
-                                <BoxView 
-                                         Grid.Row="0"
-                                         Grid.Column="0"
-                                         Grid.RowSpan="3"
-                                         BackgroundColor="{StaticResource BoardColor}"
-                                         WidthRequest="2"
-                                         VerticalOptions="FillAndExpand"
-                                         HorizontalOptions="Start" />
-                                
-                                <BoxView 
-                                         Grid.Row="0"
-                                         Grid.Column="1"
-                                         Grid.RowSpan="3"
-                                         BackgroundColor="{StaticResource BoardColor}"
-                                         WidthRequest="2"
-                                         VerticalOptions="FillAndExpand"
-                                         HorizontalOptions="End" />-->
-
 
                                 <!--Expiriy date-->
                                 <Label Padding="10,0,0,0"

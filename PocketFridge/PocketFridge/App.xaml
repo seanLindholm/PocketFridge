@@ -19,6 +19,20 @@
             <Setter Property="BackgroundColor" Value="{StaticResource main_background_color}"/>
         </Style>
 
+        <Style TargetType="Button">
+            <Setter Property="HeightRequest"
+                    Value="50" />
+            <Setter Property="WidthRequest"
+                    Value="250" />
+            <Setter Property="BackgroundColor"
+                    Value="LightBlue" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="TextColor"
+                    Value="Black" />
+            <Setter Property="CornerRadius"
+                    Value="40" />
+        </Style>
 
     </Application.Resources>
     

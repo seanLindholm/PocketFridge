@@ -10,17 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace PocketFridge.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ContentPage
+    public partial class EditFoodItem : ContentPage
     {
-        public MainPage()
+        public EditFoodItem()
         {
             InitializeComponent();
-            //MobileAds.Initialize(this);
-        }
-
-        private void GoToFridgeContent(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new FridgeContent());
         }
     }
 }

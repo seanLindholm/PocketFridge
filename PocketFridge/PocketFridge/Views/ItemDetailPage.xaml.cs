@@ -14,8 +14,12 @@ namespace PocketFridge.Views
     public partial class ItemDetailPage : ContentPage
     {
         public Command<FoodItem> DeleteItemCommand { get; }
+        public Command<FoodItem> ConsumeItemCommand { get; }
+        public Command<FoodItem> EditItemCommand { get; }
+
+
         public string foodName { get; private set; }
-        public IList<FoodItem> foodDetail { get; private set; }
+        public ObservableCollection<FoodItem> foodDetail { get; private set; }
         private FoodContainer foodCon { get; set; }
 
 
@@ -25,6 +29,8 @@ namespace PocketFridge.Views
         {
             InitializeComponent();
             DeleteItemCommand = new Command<FoodItem>(OnDeleteItem);
+            ConsumeItemCommand = new Command<FoodItem>(OnConsumedItem);
+            EditItemCommand = new Command<FoodItem>(OnEditItem);
             foodName_id = foodName;
         }
 
@@ -47,7 +53,9 @@ namespace PocketFridge.Views
                
                 foodCon = App.Database.GetFridgeItem(foodName_id);
                 foodName = foodCon.foodName;
-                foodDetail = foodCon.foods.OrderBy(x => x.expiriyDate).ToList();
+                foodDetail = new ObservableCollection<FoodItem>(foodCon.foods.OrderBy(x => x.expiriyDate).ToList());
+                OnPropertyChanged(nameof(foodDetail));
+                OnPropertyChanged(nameof(foodCon));
                 BindingContext = this;
             }
             catch (Exception e)
@@ -58,7 +66,7 @@ namespace PocketFridge.Views
             }
         }
 
-        async void OnDeleteTapped(object sender, EventArgs args)
+        private async void OnDeleteTapped(object sender, EventArgs args)
         {
             try
             {
@@ -76,11 +84,52 @@ namespace PocketFridge.Views
             }
         }
 
-        private void OnDeleteItem(FoodItem item)
+        private async void OnAddTapped(object sender, EventArgs e)
         {
-            Console.WriteLine("hello");
-            DisplayAlert("SWIPED", $"You did it! {item.expiriyString} {item.fridgeName} {item.opened}", "weee");
+            //When item selected navigate to the detail page
+            await Navigation.PushAsync(new ItemAddPage(foodName));
         }
+
+        private async void OnDeleteItem(FoodItem item)
+        {
+            if(await DisplayAlert("Delete item from fridge", $"Are you sure you want to delete this item?", "yes", "no"))
+            {
+                if(await DisplayAlert("Delete item from fridge", $"Are you deleting item because it is getting thrown out?", "yes", "no"))
+                {
+                    // Add wasted item to counter (statistics)
+                }
+
+                deleteFoodItemFromCollection(item);
+            }
+        }
+
+        private void deleteFoodItemFromCollection(FoodItem item)
+        {
+            //When deleting remove this from the collectionView list, and the actual foodContainer
+            foodDetail.Remove(item);
+            foodCon.foods.Remove(item);
+            foodCon.quantity -= 1;
+            OnPropertyChanged(nameof(foodDetail));
+            OnPropertyChanged(nameof(foodCon));
+
+            //Save the updated food container
+            App.Database.SaveItem(foodCon);
+        }
+
+        private async void OnConsumedItem(FoodItem item)
+        {
+            if (await DisplayAlert("Consumed item", $"Do you wish to mark this item as consumed?", "yes", "no"))
+            {
+                deleteFoodItemFromCollection(item);
+            }
+        }
+
+        private void OnEditItem(FoodItem item)
+        {
+            Console.WriteLine("Edit this item!");
+            Navigation.PushAsync(new EditFoodItem());
+        }
+        
 
         private void OnEditTapped(object sender, EventArgs e)
         {
