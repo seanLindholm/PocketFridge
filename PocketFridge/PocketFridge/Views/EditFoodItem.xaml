@@ -22,10 +22,67 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid  Margin="5,0,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <!--Date picker for expiriy, can not be before today-->
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalOptions="Center"
+                   Text="Expiriry Date:" />
+
+            <DatePicker Grid.Row="0"
+                        Grid.Column="1"
+                        Date="{Binding editable_item.expiriyDate}"
+                        MinimumDate="{Binding currentDate}"
+                        VerticalOptions="Center"
+                        FontSize="14" />
+            
+            <!--Fridge Name-->
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   VerticalOptions="Center"
+                   Text="Fridge name:" />
+
+            <Entry Grid.Row="1"
+                   Grid.Column="1"
+                   Text="{Binding editable_item.fridgeName}"
+                   VerticalOptions="Center"
+                   FontSize="14" />
+            
+            <!--Opened-->
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   VerticalOptions="Center"
+                   Text="Item open:" />
+
+            <CheckBox Grid.Row="2"
+                      Grid.Column="1"
+                      VerticalOptions="Center"
+                      IsChecked="{Binding editable_item.opened}" />
+            
+            <!--Accept button-->
+            <Button Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Complete Edit" 
+                    VerticalOptions="End"
+                    Clicked="Edit_Clicked"/>
+
+            <!--Cancle button-->
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Text="Cancle"
+                    VerticalOptions="End"
+                    Clicked="Cancle_Clicked" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

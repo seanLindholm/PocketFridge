@@ -127,7 +127,12 @@ namespace PocketFridge.Views
         private void OnEditItem(FoodItem item)
         {
             Console.WriteLine("Edit this item!");
-            Navigation.PushAsync(new EditFoodItem());
+            var foodItemIndex = foodCon.foods.FindIndex(x => x.Equals(item));
+            Console.WriteLine(foodItemIndex);
+            Console.WriteLine($"food item: {foodCon.foods[foodItemIndex].expiriyString} {foodCon.foods[foodItemIndex].opened} {foodCon.foods[foodItemIndex].fridgeName}");
+            
+            Navigation.PushAsync(new EditFoodItem(foodCon,foodItemIndex));
+
         }
         
 

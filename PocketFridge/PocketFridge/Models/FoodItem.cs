@@ -14,5 +14,10 @@ namespace PocketFridge.Models
         public bool opened { get; set; }
         public int? opened_dateTillExpired { get; set; }
 
+    
+        public override string ToString()
+        {
+            return $"Fridge name: '{fridgeName}', Expiriy: '{expiriyString}', Item opened: '{opened}'";
+        }
     }
 }
