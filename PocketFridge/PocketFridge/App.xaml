@@ -5,18 +5,40 @@
     <Application.Resources>
 
         <!--Color schema-->
-        <Color x:Key="main_text_color" >LightGray</Color>
-        <Color x:Key="main_background_color" >WhiteSmoke</Color>
-        <Color x:Key="bar_background_color" >#3a221f</Color>
-        <Color x:Key="BoardColor">black</Color>    
-        
+        <Color x:Key="main_text_color">LightGray</Color>
+        <Color x:Key="main_background_color">white</Color>
+        <Color x:Key="bar_background_color">#3a221f</Color>
+        <Color x:Key="BoardColor">black</Color>
+
         <!--The vertical and horizontal border margins-->
         <Thickness x:Key="HorizontalBorderMargin">2,0,2,0</Thickness>
 
+        <Style TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="Black" />
+        </Style>
+
         <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="{StaticResource bar_background_color}"/>
-            <Setter Property="BarTextColor" Value="{StaticResource main_text_color}"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource main_background_color}"/>
+            <Setter Property="BarBackgroundColor"
+                    Value="{StaticResource bar_background_color}" />
+            <Setter Property="BarTextColor"
+                    Value="{StaticResource main_text_color}" />
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource main_background_color}" />
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="TextColor"
+                    Value="Black" />
+            <Setter Property="Visual"
+                    Value="Material" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="TextColor"
+                    Value="Black" />
+            <Setter Property="PlaceholderColor"
+                    Value="Gray" />
         </Style>
 
         <Style TargetType="Button">
@@ -34,7 +56,9 @@
                     Value="40" />
         </Style>
 
+       
+
     </Application.Resources>
-    
-    
+
+
 </Application>

@@ -29,7 +29,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <Image Grid.Column="0"
+                <Image Margin="5,0,0,0" Grid.Column="0"
                        Source="deletebin"
                        HorizontalOptions="StartAndExpand"
                        VerticalOptions="CenterAndExpand">

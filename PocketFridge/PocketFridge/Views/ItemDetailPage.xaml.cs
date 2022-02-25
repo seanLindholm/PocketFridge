@@ -74,7 +74,7 @@ namespace PocketFridge.Views
                 if (yes)
                 {
                     await App.Database.DeleteFoodContainer(foodCon);
-                    await Navigation.PopToRootAsync();
+                    await Navigation.PopAsync();
                 }
                 
             }

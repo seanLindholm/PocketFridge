@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
+             xmlns:vm="clr-namespace:PocketFridge.ViewModels"
              x:Class="PocketFridge.Views.MainPage"
              BackgroundColor="{StaticResource bar_background_color}"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
+
         <Grid Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -38,7 +40,7 @@
                         Text="Fridge Content"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="Center"
-                        Clicked="GoToFridgeContent" />
+                        Command="{Binding goToFridgeContent}" />
 
                 <Button Grid.Row="1"
                         Text="Grocery List"

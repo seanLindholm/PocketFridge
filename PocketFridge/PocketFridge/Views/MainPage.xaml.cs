@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PocketFridge.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,7 @@ namespace PocketFridge.Views
         public MainPage()
         {
             InitializeComponent();
-            //MobileAds.Initialize(this);
-        }
-
-        private void GoToFridgeContent(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new FridgeContent());
+            BindingContext = new MainPageViewModel(Navigation);
         }
     }
 }

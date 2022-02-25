@@ -4,113 +4,129 @@
              x:Class="PocketFridge.Views.FridgeContent"
              NavigationPage.HasBackButton="False">
 
-    
-    
+
+
     <NavigationPage.TitleView>
         <Label HorizontalOptions="Center">
-        <Label.FormattedText>
-            <FormattedString>
-                <Span Text="Pocket Fridge " FontSize="16" TextColor="LightGray"/>
-                <Span Text="saving the world one item at a time" FontSize="12" FontAttributes="Italic" TextColor="LightGray"/>
-            </FormattedString>
-        </Label.FormattedText>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Pocket Fridge "
+                          FontSize="16"
+                          TextColor="LightGray" />
+                    <Span Text="saving the world one item at a time"
+                          FontSize="12"
+                          FontAttributes="Italic"
+                          TextColor="LightGray" />
+                </FormattedString>
+            </Label.FormattedText>
         </Label>
     </NavigationPage.TitleView>
 
     <Grid Padding="0,0,0,5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding Inventory}"
+                            x:Name="collectionView"
                             SelectionMode="Single"
                             SelectionChanged="OnSelectionChanged"
-                            Grid.Row="0">
+                            Grid.Row="0"
+                            Margin="0,0,0,0">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+
+                <CollectionView.Footer>
+
+                    <!--<Button Text="Add more items"
+                            Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.AddCommand}" />-->
+                    <Image Source="add">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddCommand}"
+                                                  NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                </CollectionView.Footer>
+
+
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate>
-                        <Grid Padding="10"
-                              RowDefinitions="Auto, *"
-                              ColumnDefinitions="Auto, *">
-                        
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal" />
-                                    <VisualState Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="Yellow" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem Text="Consumed"
+                                           IconImageSource="consumed"
+                                           BackgroundColor="Green"
+                                           Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.ConsumeCommand}"
+                                           CommandParameter="{Binding .}" />
+                            </SwipeView.RightItems>
+                            <Grid Padding="10"
+                                  RowDefinitions="Auto, *"
+                                  ColumnDefinitions="Auto, *"
+                                  BackgroundColor="White">
 
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Product name: "/>
-                                        <Span Text="{Binding foodName}"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor"
+                                                        Value="Yellow" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
 
-                            <Label Grid.Column="1"
-                                    HorizontalOptions="End">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Quantatiy: " FontAttributes="Bold"/>
-                                        <Span Text="{Binding quantity}"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Product name: " />
+                                            <Span Text="{Binding foodName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
-                            <Label Grid.Row="1" TranslationY="5">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Next expiry: " FontAttributes="Bold"/>
-                                        <Span Text="{Binding oldest.expiriyString}"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                <Label Grid.Column="1"
+                                       HorizontalOptions="End">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Quantatiy: "
+                                                  FontAttributes="Bold" />
+                                            <Span Text="{Binding quantity}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
-                            <CheckBox Grid.Row="1" 
-                                      Grid.Column="1" 
-                                      HorizontalOptions="End"
-                                      IsChecked="{Binding oldest.opened}"
-                                      CheckedChanged="OnCheckBoxChecked"
-                                      TranslationX="9"
-                                      />
-                        </Grid>
+                                <Label Grid.Row="1"
+                                       TranslationY="5">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Next expiry: "
+                                                  FontAttributes="Bold" />
+                                            <Span Text="{Binding oldest.expiriyString}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+                        </SwipeView>
                     </DataTemplate>
+
                 </CollectionView.ItemTemplate>
+
             </CollectionView >
         </RefreshView>
-       
-
-        <!-- Display a bottom tab bar containing two tabs -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column = "0" Text="Hello" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-            <Label Grid.Column = "1" Text="you" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-            <Image Grid.Column = "2" Source="add" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer
-                            Tapped="OnAddTapped"
-                            NumberOfTapsRequired="1" />
-                </Image.GestureRecognizers>
-            </Image>
-        </Grid>
-        
 
     </Grid>
 
-   
-    
+
+
 
 </ContentPage>
