@@ -70,7 +70,8 @@
                    x:Name="entry_food_container"
                    Placeholder="Write new food container here"
                    FontSize="16"
-                   TextColor="Black" />
+                   TextColor="Black"
+                   Text="{Binding user_defined_foodName, Mode=TwoWay}"/>
             <!-- This should probably be a list view in the future-->
             <Grid Grid.Row="4"
                   Grid.ColumnSpan="2">
@@ -129,12 +130,12 @@
             <Button Grid.Row="5"
                     Text="Add"
                     VerticalOptions="End"
-                    Clicked="Add_Button_Clicked" />
+                    Command="{Binding AddCommand}" />
             <Button Grid.Row="5"
                     Grid.Column="1"
-                    Text="Cancle"
+                    Text="Cancel"
                     VerticalOptions="End"
-                    Clicked="Cancle_Button_Clicked" />
+                    Command="{Binding CancelCommand}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

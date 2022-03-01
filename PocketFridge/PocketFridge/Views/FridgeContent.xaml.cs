@@ -19,34 +19,17 @@ namespace PocketFridge.Views
 
         public FridgeContent()
         {
-            fridgeVM = new FridgeContentViewModel(Navigation);
             InitializeComponent();
-            BindingContext = fridgeVM;
+            BindingContext = fridgeVM = new FridgeContentViewModel();
         }
        
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            fridgeVM.RefreshPage();
+            fridgeVM.OnAppearing();
             
 
-        }
-        async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            var collectionView = sender as CollectionView;
-            if (collectionView.SelectedItem == null)
-            {
-                return;
-            }
-            FoodContainer selectedItem = e.CurrentSelection.FirstOrDefault() as FoodContainer;
-
-            //When item selected navigate to the detail page
-            await Navigation.PushAsync(new ItemDetailPage(selectedItem.foodName));
-
-            //Clear selection
-            collectionView.SelectedItem = null;
         }
     }
 }

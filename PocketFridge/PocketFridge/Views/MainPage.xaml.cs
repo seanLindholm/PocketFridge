@@ -16,7 +16,6 @@ namespace PocketFridge.Views
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel(Navigation);
         }
     }
 }

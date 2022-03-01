@@ -19,10 +19,12 @@ namespace PocketFridge.ViewModels
         public ICommand RefreshCommand { get; }
         public ICommand AddCommand { get; }
         public ICommand ConsumeCommand { get; }
+        public ICommand ItemTapped { get; }
 
         bool isRefreshing;
 
-        private INavigation navigation;
+        FoodContainer selected = null;
+
         
 
         public bool IsRefreshing
@@ -39,12 +41,13 @@ namespace PocketFridge.ViewModels
 
 
 
-        public FridgeContentViewModel(INavigation navigation)
+        public FridgeContentViewModel()
         {
             RefreshCommand = new Command(RefreshPage);
             AddCommand = new Command(OnAddTapped);
             ConsumeCommand = new Command<FoodContainer>(consumeOldest);
-            this.navigation = navigation;
+            ItemTapped = new Command<FoodContainer>(OnItemTapped);
+            
         }
 
        
@@ -54,16 +57,32 @@ namespace PocketFridge.ViewModels
             await Application.Current.MainPage.Navigation.PushAsync(new ItemAddPage());
         }
 
-        public void RefreshPage()
+        private void RefreshPage()
         {
             Inventory = new ObservableCollection<FoodContainer>(App.Database.GetAllFridgeItems().Where(x => x.oldest != null) );
             OnPropertyChanged(nameof(Inventory));
             BindingContext = this;
             IsRefreshing = false;
+            selected = null;
+        }
+
+
+        public void OnAppearing()
+        {
+            RefreshPage();
         }
 
 
 
+        private async void OnItemTapped(FoodContainer item)
+        {
+            //Set the views sleceted item
+            selected = item;
+
+            //When item selected navigate to the detail page
+            await Application.Current.MainPage.Navigation.PushAsync(new ItemDetailPage(item.foodName));
+
+        }
 
         private async void consumeOldest(FoodContainer item)
         {

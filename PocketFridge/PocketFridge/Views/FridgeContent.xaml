@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PocketFridge.Views.FridgeContent"
+             xmlns:vm="clr-namespace:PocketFridge.ViewModels"
              NavigationPage.HasBackButton="False">
 
 
@@ -32,8 +33,7 @@
                      Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding Inventory}"
                             x:Name="collectionView"
-                            SelectionMode="Single"
-                            SelectionChanged="OnSelectionChanged"
+                            SelectionMode="None"
                             Grid.Row="0"
                             Margin="0,0,0,0">
 
@@ -44,9 +44,6 @@
 
 
                 <CollectionView.Footer>
-
-                    <!--<Button Text="Add more items"
-                            Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.AddCommand}" />-->
                     <Image Source="add">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AddCommand}"
@@ -72,6 +69,12 @@
                                   RowDefinitions="Auto, *"
                                   ColumnDefinitions="Auto, *"
                                   BackgroundColor="White">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FridgeContentViewModel}}, Path=ItemTapped}"
+                                                          CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+
+
 
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup Name="CommonStates">

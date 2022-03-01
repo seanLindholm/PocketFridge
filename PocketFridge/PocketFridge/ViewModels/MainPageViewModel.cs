@@ -11,11 +11,9 @@ namespace PocketFridge.ViewModels
     {
         public ICommand goToFridgeContent { get; }
 
-        private INavigation navigation;
 
-        public MainPageViewModel(INavigation navigation)
+        public MainPageViewModel()
         {
-            this.navigation = navigation;
             goToFridgeContent = new Command(GoToFridgeContent);
         }
 
@@ -23,7 +21,7 @@ namespace PocketFridge.ViewModels
 
         private void GoToFridgeContent()
         {
-            navigation.PushAsync(new FridgeContent());
+            Application.Current.MainPage.Navigation.PushAsync(new FridgeContent());
         }
     }
 }

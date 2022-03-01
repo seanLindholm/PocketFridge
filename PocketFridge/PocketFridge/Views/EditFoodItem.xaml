@@ -75,14 +75,14 @@
                     Grid.Column="0"
                     Text="Complete Edit" 
                     VerticalOptions="End"
-                    Clicked="Edit_Clicked"/>
+                    Command="{Binding CompleteEditCommand}"/>
 
             <!--Cancle button-->
             <Button Grid.Row="3"
                     Grid.Column="1"
                     Text="Cancle"
                     VerticalOptions="End"
-                    Clicked="Cancle_Clicked" />
+                    Command="{Binding CancleEditCommand}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PocketFridge.Views.ItemDetailPage"
+             xmlns:vm="clr-namespace:PocketFridge.ViewModels"
              Title="Pocket Fridge"
              NavigationPage.HasBackButton="False"
              BackgroundColor="Black">
@@ -34,7 +35,7 @@
                        HorizontalOptions="StartAndExpand"
                        VerticalOptions="CenterAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnDeleteTapped"
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ItemDetailViewModel}}, Path=DeleteContainerCommand}"
                                               NumberOfTapsRequired="1" />
                     </Image.GestureRecognizers>
                 </Image>
@@ -51,7 +52,7 @@
                        HorizontalOptions="EndAndExpand"
                        VerticalOptions="CenterAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnAddTapped"
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ItemDetailViewModel}}, Path=AddToContainerCommand}"
                                               NumberOfTapsRequired="1" />
                     </Image.GestureRecognizers>
                 </Image>
@@ -75,13 +76,15 @@
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">
                                     <SwipeItem Text="Delete"
-                                               IconImageSource="deletebin_swipe"
-                                               BackgroundColor="Red"
+                                           IconImageSource="deletebin_swipe"
+                                           BackgroundColor="Red"
                                                Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteItemCommand}"
-                                               CommandParameter="{Binding .}" />
+                                           CommandParameter="{Binding .}" />
                                 </SwipeItems>
                             </SwipeView.LeftItems>
+                            
                             <SwipeView.RightItems>
+                               
                                 <SwipeItem Text="Edit"
                                            IconImageSource="edit"
                                            BackgroundColor="Orange"
@@ -92,6 +95,7 @@
                                            BackgroundColor="Green"
                                            Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.ConsumeItemCommand}"
                                            CommandParameter="{Binding .}" />
+                               
                             </SwipeView.RightItems>
                             <Grid BackgroundColor="GhostWhite"
                                   Margin="5,0,5,0">
